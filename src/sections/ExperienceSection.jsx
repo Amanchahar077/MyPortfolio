@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
 import { BriefcaseBusiness, FileBadge2 } from "lucide-react";
 import { GlassCard } from "../components/ui/GlassCard";
+import { revealUp, viewportOnce } from "../components/ui/motion";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 export function ExperienceSection({ data }) {
@@ -9,7 +11,15 @@ export function ExperienceSection({ data }) {
       <div className="relative mt-12 grid gap-6">
         <div className="absolute left-[26px] top-8 hidden h-[calc(100%-4rem)] w-px bg-gradient-to-b from-brand/40 via-white/10 to-transparent md:block" />
         {data.items.map((item) => (
-          <GlassCard key={`${item.role}-${item.company}`} className="rounded-[32px] p-6 sm:p-8">
+          <GlassCard
+            key={`${item.role}-${item.company}`}
+            className="rounded-[32px] p-6 sm:p-8"
+            interactive
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={revealUp}
+          >
             <div className="grid gap-5 md:grid-cols-[56px_1fr_auto] md:items-start">
               <div className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-brand/20 bg-brand/10 text-brand-soft">
                 <BriefcaseBusiness className="h-6 w-6" />
@@ -24,15 +34,18 @@ export function ExperienceSection({ data }) {
                 <p className="mt-2 text-white/45">{item.dates}</p>
                 <p className="mt-4 max-w-3xl leading-7 text-white/68">{item.description}</p>
               </div>
-              <a
+              <motion.a
                 href={item.certificate}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/75 transition hover:bg-white/10 hover:text-white"
+                whileHover={{ y: -3, scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: "spring", stiffness: 300, damping: 22 }}
               >
                 <FileBadge2 className="h-4 w-4" />
                 Certificate
-              </a>
+              </motion.a>
             </div>
           </GlassCard>
         ))}

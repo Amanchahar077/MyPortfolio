@@ -1,6 +1,8 @@
+import { motion } from "framer-motion";
 import { ArrowUpRight, ExternalLink, Github } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { GlassCard } from "../components/ui/GlassCard";
+import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 const accentMap = {
@@ -20,7 +22,15 @@ export function ProjectsSection({ data, onOpenProject }) {
       <div className="mt-12 grid gap-6">
         <div className="grid gap-6 xl:grid-cols-2">
           {featured.map((project) => (
-            <GlassCard key={project.id} className="group relative overflow-hidden rounded-[36px] p-6 sm:p-8">
+            <GlassCard
+              key={project.id}
+              className="group relative overflow-hidden rounded-[36px] p-6 sm:p-8"
+              interactive
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={revealSoft}
+            >
               <div className={`absolute inset-0 bg-gradient-to-br ${accentMap[project.accent]}`} />
               <div className="relative">
                 <div className="flex items-center justify-between gap-4">
@@ -52,7 +62,15 @@ export function ProjectsSection({ data, onOpenProject }) {
         </div>
         <div className="grid gap-6 lg:grid-cols-2">
           {secondary.map((project) => (
-            <GlassCard key={project.id} className="rounded-[32px] p-6">
+            <GlassCard
+              key={project.id}
+              className="rounded-[32px] p-6"
+              interactive
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportOnce}
+              variants={revealUp}
+            >
               <p className="text-xs uppercase tracking-[0.35em] text-white/40">{project.category}</p>
               <h3 className="mt-3 font-display text-2xl text-white">{project.title}</h3>
               <p className="mt-2 text-white/58">{project.subtitle}</p>
@@ -81,14 +99,17 @@ export function ProjectsSection({ data, onOpenProject }) {
 
 function ProjectLink({ href, icon: Icon, label }) {
   return (
-    <a
+    <motion.a
       href={href}
       target="_blank"
       rel="noreferrer"
       className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/75 transition hover:bg-white/10 hover:text-white"
+      whileHover={{ y: -3, scale: 1.01 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
     >
       <Icon className="h-4 w-4" />
       {label}
-    </a>
+    </motion.a>
   );
 }

@@ -1,7 +1,9 @@
+import { motion } from "framer-motion";
 import { Download, Eye } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../components/ui/Button";
 import { GlassCard } from "../components/ui/GlassCard";
+import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 export function ResumeSection({ data, onPreview }) {
@@ -32,7 +34,13 @@ export function ResumeSection({ data, onPreview }) {
   return (
     <section id="resume" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
       <SectionHeader eyebrow={data.eyebrow} title={data.title} copy={data.copy} />
-      <GlassCard className="relative mt-12 overflow-hidden rounded-[36px] p-6 sm:p-8">
+      <GlassCard
+        className="relative mt-12 overflow-hidden rounded-[36px] p-6 sm:p-8"
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={revealUp}
+      >
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,24,0.16),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(86,164,255,0.12),transparent_28%)]" />
         <div className="relative grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
@@ -56,7 +64,12 @@ export function ResumeSection({ data, onPreview }) {
               </Button>
             </div>
           </div>
-          <div className="w-full max-w-sm rounded-[30px] border border-white/10 bg-black/25 p-5">
+          <motion.div
+            className="w-full max-w-sm rounded-[30px] border border-white/10 bg-black/25 p-5"
+            variants={revealSoft}
+            whileHover={{ y: -4, scale: 1.01 }}
+            transition={{ type: "spring", stiffness: 280, damping: 24 }}
+          >
             <div className="flex items-center justify-between text-sm text-white/55">
               <span>Download sequence</span>
               <span>{progress}%</span>
@@ -67,7 +80,7 @@ export function ResumeSection({ data, onPreview }) {
                 style={{ width: `${progress}%` }}
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </GlassCard>
     </section>

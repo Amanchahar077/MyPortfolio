@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { cn } from "../../utils/cn";
+import { subtleHover, subtleTap } from "./motion";
 
 const variants = {
   primary:
@@ -21,6 +23,7 @@ export function Button({
   ...props
 }) {
   const Component = as;
+  const MotionComponent = Component === "button" ? motion.button : motion.a;
   const componentProps =
     Component === "button"
       ? { type: "button", onClick }
@@ -33,17 +36,20 @@ export function Button({
   );
 
   return (
-    <Component
+    <MotionComponent
       {...componentProps}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition duration-300",
         variants[variant],
         className
       )}
+      whileHover={subtleHover}
+      whileTap={subtleTap}
+      transition={{ type: "spring", stiffness: 280, damping: 24 }}
       {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
       {...props}
     >
       {content}
-    </Component>
+    </MotionComponent>
   );
 }

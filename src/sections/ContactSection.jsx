@@ -1,5 +1,7 @@
+import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Phone } from "lucide-react";
 import { GlassCard } from "../components/ui/GlassCard";
+import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 const icons = {
@@ -18,25 +20,37 @@ export function ContactSection({ data }) {
           {data.cards.map((card) => {
             const Icon = icons[card.label];
             return (
-              <a
+              <motion.a
                 key={card.label}
                 href={card.href}
                 target={card.href.startsWith("http") ? "_blank" : undefined}
                 rel={card.href.startsWith("http") ? "noreferrer" : undefined}
                 className="group"
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+                variants={revealSoft}
+                whileHover={{ y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 24 }}
               >
-                <GlassCard className="h-full rounded-[30px] p-6 transition duration-300 group-hover:-translate-y-1 group-hover:border-white/20">
+                <GlassCard className="h-full rounded-[30px] p-6 transition duration-300 group-hover:border-white/20" interactive>
                   <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-brand/20 bg-brand/10 text-brand-soft">
                     <Icon className="h-5 w-5" />
                   </div>
                   <p className="mt-5 text-xs uppercase tracking-[0.3em] text-white/42">{card.label}</p>
                   <p className="mt-3 text-lg text-white/82">{card.value}</p>
                 </GlassCard>
-              </a>
+              </motion.a>
             );
           })}
         </div>
-        <GlassCard className="rounded-[36px] p-6 sm:p-8">
+        <GlassCard
+          className="rounded-[36px] p-6 sm:p-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={revealUp}
+        >
           <p className="text-xs uppercase tracking-[0.35em] text-brand-soft">{data.panel.title}</p>
           <h3 className="mt-5 font-display text-3xl text-white">{data.panel.subtitle}</h3>
           <div className="mt-8 grid gap-3">

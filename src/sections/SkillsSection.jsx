@@ -1,9 +1,18 @@
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { GlassCard } from "../components/ui/GlassCard";
+import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 export function SkillsSection({ data, isMobile }) {
   const [glow, setGlow] = useState({ x: "50%", y: "50%" });
+  const constellationNodes = [
+    { label: "APIs", top: "18%", left: "66%" },
+    { label: "AI", top: "31%", left: "28%" },
+    { label: "Systems", top: "55%", left: "70%" },
+    { label: "Frontend", top: "77%", left: "40%" },
+    { label: "Security", top: "90%", left: "73%" },
+  ];
 
   const handleMove = (event) => {
     if (isMobile) return;
@@ -18,7 +27,14 @@ export function SkillsSection({ data, isMobile }) {
     <section id="skills" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
       <SectionHeader eyebrow={data.eyebrow} title={data.title} copy={data.copy} />
       <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_0.42fr]">
-        <GlassCard className="relative overflow-hidden rounded-[36px] p-6 sm:p-8" onPointerMove={handleMove}>
+        <GlassCard
+          className="relative overflow-hidden rounded-[36px] p-6 sm:p-8"
+          onPointerMove={handleMove}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={revealUp}
+        >
           <div
             className="pointer-events-none absolute inset-0 opacity-80 transition duration-300"
             style={{
@@ -27,7 +43,13 @@ export function SkillsSection({ data, isMobile }) {
           />
           <div className="relative grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {data.groups.map((group) => (
-              <div key={group.title} className="rounded-[28px] border border-white/10 bg-black/20 p-5">
+              <motion.div
+                key={group.title}
+                className="rounded-[28px] border border-white/10 bg-black/20 p-5"
+                variants={revealSoft}
+                whileHover={{ y: -5, borderColor: "rgba(255,255,255,0.18)" }}
+                transition={{ type: "spring", stiffness: 260, damping: 22 }}
+              >
                 <p className="text-xs uppercase tracking-[0.35em] text-white/40">{group.title}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
                   {group.items.map((item) => (
@@ -36,31 +58,40 @@ export function SkillsSection({ data, isMobile }) {
                     </span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </GlassCard>
-        <GlassCard className="hidden rounded-[36px] p-6 lg:block">
+        <GlassCard
+          className="hidden rounded-[36px] p-5 lg:block xl:p-6"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={revealSoft}
+        >
           <p className="text-xs uppercase tracking-[0.35em] text-brand-soft">Skill Constellation</p>
-          <div className="relative mt-6 h-full min-h-[420px] overflow-hidden rounded-[28px] border border-white/10 bg-black/20">
-            {[
-              { label: "APIs", top: "14%", left: "55%" },
-              { label: "AI", top: "26%", left: "24%" },
-              { label: "Systems", top: "48%", left: "58%" },
-              { label: "Frontend", top: "68%", left: "30%" },
-              { label: "Security", top: "80%", left: "66%" },
-            ].map((node) => (
-              <div key={node.label} className="absolute" style={{ top: node.top, left: node.left }}>
+          <div className="relative mt-5 min-h-[500px] overflow-hidden rounded-[28px] border border-white/8 bg-[linear-gradient(180deg,rgba(2,6,14,0.88),rgba(4,8,16,0.78))] px-5 py-6">
+            {constellationNodes.map((node) => (
+              <div
+                key={node.label}
+                className="absolute -translate-x-1/2 -translate-y-1/2"
+                style={{ top: node.top, left: node.left }}
+              >
                 <div className="relative">
                   <span className="absolute inset-0 animate-pulseSoft rounded-full bg-brand/20 blur-xl" />
-                  <span className="relative inline-flex rounded-full border border-brand/30 bg-brand/10 px-3 py-2 text-xs uppercase tracking-[0.25em] text-white">
+                  <span className="relative inline-flex whitespace-nowrap rounded-full border border-brand/30 bg-[linear-gradient(180deg,rgba(255,122,24,0.16),rgba(255,122,24,0.08))] px-4 py-2 text-[0.72rem] uppercase tracking-[0.24em] text-white shadow-[0_12px_30px_rgba(255,122,24,0.12)]">
                     {node.label}
                   </span>
                 </div>
               </div>
             ))}
             <svg className="absolute inset-0 h-full w-full opacity-40" viewBox="0 0 100 100" preserveAspectRatio="none">
-              <path d="M24 26 L55 14 L58 48 L30 68 L66 80" stroke="rgba(255,255,255,0.22)" fill="none" />
+              <path
+                d="M29 31 L58 18 L60 54 L36 75 L73 89"
+                stroke="rgba(255,255,255,0.14)"
+                strokeWidth="1.5"
+                fill="none"
+              />
             </svg>
           </div>
         </GlassCard>
