@@ -2,10 +2,12 @@ import { motion } from "framer-motion";
 import { Button } from "../components/ui/Button";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
+import { SectionLines } from "../components/ui/SectionLines";
 
 export function ClosingSection({ data }) {
   return (
-    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:pb-28">
+    <section className="relative mx-auto max-w-6xl overflow-hidden px-4 py-20 sm:px-6 lg:pb-28">
+      <SectionLines variant="default" />
       <GlassCard
         className="relative overflow-hidden rounded-[40px] px-6 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-12"
         initial="hidden"

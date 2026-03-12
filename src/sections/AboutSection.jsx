@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
+import { SectionLines } from "../components/ui/SectionLines";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 export function AboutSection({ data }) {
@@ -21,7 +22,8 @@ export function AboutSection({ data }) {
   };
 
   return (
-    <section id="about" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+    <section id="about" className="relative mx-auto max-w-6xl overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
+      <SectionLines variant="default" />
       <SectionHeader eyebrow={data.eyebrow} title={data.title} copy={data.copy} />
       <div className="mt-12 grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
         <GlassCard

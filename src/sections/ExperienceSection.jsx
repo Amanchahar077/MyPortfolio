@@ -2,11 +2,13 @@ import { motion } from "framer-motion";
 import { BriefcaseBusiness, FileBadge2 } from "lucide-react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealUp, viewportOnce } from "../components/ui/motion";
+import { SectionLines } from "../components/ui/SectionLines";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 export function ExperienceSection({ data }) {
   return (
-    <section id="experience" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+    <section id="experience" className="relative mx-auto max-w-6xl overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
+      <SectionLines variant="default" />
       <SectionHeader eyebrow={data.eyebrow} title={data.title} copy={data.copy} />
       <div className="relative mt-12 grid gap-6">
         <div className="absolute left-[26px] top-8 hidden h-[calc(100%-4rem)] w-px bg-gradient-to-b from-brand/40 via-white/10 to-transparent md:block" />

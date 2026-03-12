@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mouse } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { HeroCubeBackground } from "../components/HeroCubeBackground";
 import { Button } from "../components/ui/Button";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
@@ -13,15 +14,42 @@ const iconMap = {
 
 export function HeroSection({ data, reducedMotion, isMobile }) {
   const [roleIndex, setRoleIndex] = useState(0);
+  const [typedRole, setTypedRole] = useState(data.heroRoles[0] ?? "");
+  const [isDeleting, setIsDeleting] = useState(false);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    if (reducedMotion) return undefined;
-    const interval = window.setInterval(() => {
-      setRoleIndex((current) => (current + 1) % data.heroRoles.length);
-    }, 2200);
-    return () => window.clearInterval(interval);
-  }, [data.heroRoles.length, reducedMotion]);
+    if (!data.heroRoles.length) return undefined;
+    if (reducedMotion) {
+      setTypedRole(data.heroRoles[roleIndex] ?? "");
+      return undefined;
+    }
+
+    const currentRole = data.heroRoles[roleIndex] ?? "";
+    const isFullyTyped = typedRole === currentRole;
+    const nextText = isDeleting
+      ? currentRole.slice(0, Math.max(typedRole.length - 1, 0))
+      : currentRole.slice(0, typedRole.length + 1);
+
+    const timeout = window.setTimeout(
+      () => {
+        setTypedRole(nextText);
+
+        if (!isDeleting && nextText === currentRole) {
+          setIsDeleting(true);
+          return;
+        }
+
+        if (isDeleting && nextText === "") {
+          setIsDeleting(false);
+          setRoleIndex((current) => (current + 1) % data.heroRoles.length);
+        }
+      },
+      isFullyTyped ? 1600 : isDeleting ? 70 : 120
+    );
+
+    return () => window.clearTimeout(timeout);
+  }, [data.heroRoles, isDeleting, reducedMotion, roleIndex, typedRole]);
 
   useEffect(() => {
     if (isMobile || reducedMotion) return undefined;
@@ -35,11 +63,16 @@ export function HeroSection({ data, reducedMotion, isMobile }) {
     return () => window.removeEventListener("pointermove", handleMove);
   }, [isMobile, reducedMotion]);
 
-  const currentRole = useMemo(() => data.heroRoles[roleIndex], [data.heroRoles, roleIndex]);
-
   return (
-    <section id="hero" className="relative pt-14 sm:pt-20">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 pb-24 pt-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:pb-32">
+    <section id="hero" className="relative overflow-hidden pt-14 sm:pt-20">
+      {!isMobile ? (
+        <HeroCubeBackground
+          className="pointer-events-none absolute inset-0 opacity-80"
+          offset={mouse}
+        />
+      ) : null}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(255,122,24,0.24),transparent_30%),radial-gradient(circle_at_58%_38%,rgba(255,255,255,0.06),transparent_22%),linear-gradient(180deg,rgba(4,6,12,0.12),rgba(4,6,12,0.58))]" />
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 pb-24 pt-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:pb-32">
         <div className="relative">
           <div
             className="absolute -left-12 top-10 h-40 w-40 rounded-full bg-brand/20 blur-3xl"
@@ -50,7 +83,7 @@ export function HeroSection({ data, reducedMotion, isMobile }) {
             style={{ transform: `translate3d(${-mouse.x * 0.8}px, ${-mouse.y * 0.8}px, 0)` }}
           />
           <motion.div
-            className="relative"
+            className="relative z-10"
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
@@ -66,7 +99,8 @@ export function HeroSection({ data, reducedMotion, isMobile }) {
               {data.name}
             </motion.h1>
             <motion.div className="mt-5 min-h-[40px] text-xl font-medium text-white/80 sm:text-2xl" variants={revealUp}>
-              <span className="text-brand-soft">{currentRole}</span>
+              <span className="text-brand-soft">{typedRole}</span>
+              <span className="ml-1 inline-block h-[1.2em] w-[4px] translate-y-[0.08em] rounded-full bg-brand-soft align-middle" />
             </motion.div>
             <motion.p className="mt-6 max-w-2xl text-base leading-8 text-white/65 sm:text-lg" variants={revealUp}>
               {data.summary}

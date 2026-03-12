@@ -3,6 +3,7 @@ import { ArrowUpRight, ExternalLink, Github } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
+import { SectionLines } from "../components/ui/SectionLines";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 const accentMap = {
@@ -17,7 +18,8 @@ export function ProjectsSection({ data, onOpenProject }) {
   const secondary = data.items.slice(2);
 
   return (
-    <section id="projects" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+    <section id="projects" className="relative mx-auto max-w-6xl overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
+      <SectionLines variant="wide" />
       <SectionHeader eyebrow={data.eyebrow} title={data.title} copy={data.copy} />
       <div className="mt-12 grid gap-6">
         <div className="grid gap-6 xl:grid-cols-2">

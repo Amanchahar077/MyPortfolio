@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "../components/ui/Button";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
+import { SectionLines } from "../components/ui/SectionLines";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 export function ResumeSection({ data, onPreview }) {
@@ -32,7 +33,8 @@ export function ResumeSection({ data, onPreview }) {
   };
 
   return (
-    <section id="resume" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+    <section id="resume" className="relative mx-auto max-w-6xl overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
+      <SectionLines variant="compact" />
       <SectionHeader eyebrow={data.eyebrow} title={data.title} copy={data.copy} />
       <GlassCard
         className="relative mt-12 overflow-hidden rounded-[36px] p-6 sm:p-8"

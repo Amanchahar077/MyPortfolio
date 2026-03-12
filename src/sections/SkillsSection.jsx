@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
+import { SectionLines } from "../components/ui/SectionLines";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 export function SkillsSection({ data, isMobile }) {
@@ -24,7 +25,8 @@ export function SkillsSection({ data, isMobile }) {
   };
 
   return (
-    <section id="skills" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
+    <section id="skills" className="relative mx-auto max-w-6xl overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
+      <SectionLines variant="compact" />
       <SectionHeader eyebrow={data.eyebrow} title={data.title} copy={data.copy} />
       <div className="mt-12 grid gap-6 lg:grid-cols-[1fr_0.42fr]">
         <GlassCard
