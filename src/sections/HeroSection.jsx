@@ -1,11 +1,10 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mouse } from "lucide-react";
 import { useEffect, useState } from "react";
-import { HeroCubeBackground } from "../components/HeroCubeBackground";
+import { ThreeBackground } from "../components/ThreeBackground";
 import { Button } from "../components/ui/Button";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
-import { ThreeBackground } from "../components/ThreeBackground";
 
 const iconMap = {
   GitHub: Github,
@@ -16,7 +15,6 @@ export function HeroSection({ data, reducedMotion, isMobile }) {
   const [roleIndex, setRoleIndex] = useState(0);
   const [typedRole, setTypedRole] = useState(data.heroRoles[0] ?? "");
   const [isDeleting, setIsDeleting] = useState(false);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (!data.heroRoles.length) return undefined;
@@ -51,37 +49,13 @@ export function HeroSection({ data, reducedMotion, isMobile }) {
     return () => window.clearTimeout(timeout);
   }, [data.heroRoles, isDeleting, reducedMotion, roleIndex, typedRole]);
 
-  useEffect(() => {
-    if (isMobile || reducedMotion) return undefined;
-    const handleMove = (event) => {
-      setMouse({
-        x: (event.clientX / window.innerWidth - 0.5) * 24,
-        y: (event.clientY / window.innerHeight - 0.5) * 24,
-      });
-    };
-    window.addEventListener("pointermove", handleMove);
-    return () => window.removeEventListener("pointermove", handleMove);
-  }, [isMobile, reducedMotion]);
-
   return (
     <section id="hero" className="relative overflow-hidden pt-14 sm:pt-20">
-      {!isMobile ? (
-        <HeroCubeBackground
-          className="pointer-events-none absolute inset-0 opacity-80"
-          offset={mouse}
-        />
-      ) : null}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(255,122,24,0.24),transparent_30%),radial-gradient(circle_at_58%_38%,rgba(255,255,255,0.06),transparent_22%),linear-gradient(180deg,rgba(4,6,12,0.12),rgba(4,6,12,0.58))]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(255,122,24,0.24),transparent_30%),radial-gradient(circle_at_72%_22%,rgba(86,164,255,0.14),transparent_24%),radial-gradient(circle_at_58%_38%,rgba(255,255,255,0.05),transparent_22%),linear-gradient(180deg,rgba(4,6,12,0.12),rgba(4,6,12,0.58))]" />
       <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 pb-24 pt-12 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-16 lg:pb-32">
         <div className="relative">
-          <div
-            className="absolute -left-12 top-10 h-40 w-40 rounded-full bg-brand/20 blur-3xl"
-            style={{ transform: `translate3d(${mouse.x}px, ${mouse.y}px, 0)` }}
-          />
-          <div
-            className="absolute left-28 top-40 h-24 w-24 rounded-full bg-sky-400/15 blur-3xl"
-            style={{ transform: `translate3d(${-mouse.x * 0.8}px, ${-mouse.y * 0.8}px, 0)` }}
-          />
+          <div className="absolute -left-12 top-10 h-40 w-40 rounded-full bg-brand/20 blur-3xl" />
+          <div className="absolute left-28 top-40 h-24 w-24 rounded-full bg-sky-400/15 blur-3xl" />
           <motion.div
             className="relative z-10"
             initial="hidden"
@@ -143,14 +117,15 @@ export function HeroSection({ data, reducedMotion, isMobile }) {
         <div className="relative">
           <GlassCard
             className="relative overflow-hidden rounded-[36px] p-6 sm:p-8"
-            interactive
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
             variants={revealSoft}
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,24,0.16),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(86,164,255,0.14),transparent_28%)]" />
-            <ThreeBackground className="absolute inset-0 opacity-70" />
+            {!isMobile && !reducedMotion ? (
+              <ThreeBackground className="absolute inset-0 opacity-55" />
+            ) : null}
             <div className="relative z-10">
               <div className="mb-6 inline-flex rounded-full border border-brand/30 bg-brand/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-brand-soft">
                 {data.heroSideCard.title}

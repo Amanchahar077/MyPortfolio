@@ -67,21 +67,33 @@ export function ResumeSection({ data, onPreview }) {
             </div>
           </div>
           <motion.div
-            className="w-full max-w-sm rounded-[30px] border border-white/10 bg-black/25 p-5"
+            className="w-full max-w-sm rounded-[30px] border border-white/10 bg-[linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0.04))] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl"
             variants={revealSoft}
             whileHover={{ y: -4, scale: 1.01 }}
             transition={{ type: "spring", stiffness: 280, damping: 24 }}
           >
-            <div className="flex items-center justify-between text-sm text-white/55">
-              <span>Download sequence</span>
-              <span>{progress}%</span>
+            <div className="inline-flex rounded-full border border-brand/30 bg-brand/10 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.28em] text-brand-soft">
+              Download sequence
             </div>
-            <div className="mt-4 h-3 overflow-hidden rounded-full bg-white/10">
+            <div className="mt-5 flex items-end justify-between gap-4">
+              <div>
+                <p className="text-xs uppercase tracking-[0.28em] text-white/38">Transfer status</p>
+                <p className="mt-2 text-lg font-medium text-white/80">Resume package</p>
+              </div>
+              <div className="text-right">
+                <p className="text-[0.72rem] uppercase tracking-[0.28em] text-white/35">Progress</p>
+                <p className="mt-2 font-display text-3xl leading-none text-white">{progress}%</p>
+              </div>
+            </div>
+            <div className="mt-5 h-2.5 overflow-hidden rounded-full bg-white/10">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-brand to-brand-soft transition-all duration-200"
+                className="h-full rounded-full bg-brand transition-all duration-200"
                 style={{ width: `${progress}%` }}
               />
             </div>
+            <p className="mt-3 text-sm leading-6 text-white/48">
+              {progress === 0 ? "Ready to download instantly." : "Preparing your resume download."}
+            </p>
           </motion.div>
         </div>
       </GlassCard>

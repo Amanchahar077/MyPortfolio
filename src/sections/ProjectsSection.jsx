@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
@@ -35,13 +35,10 @@ export function ProjectsSection({ data, onOpenProject }) {
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${accentMap[project.accent]}`} />
               <div className="relative">
-                <div className="flex items-center justify-between gap-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.35em] text-white/45">{project.category}</p>
-                    <h3 className="mt-3 font-display text-3xl text-white">{project.title}</h3>
-                    <p className="mt-2 text-lg text-white/55">{project.subtitle}</p>
-                  </div>
-                  <ArrowUpRight className="h-10 w-10 rounded-full border border-white/10 bg-white/5 p-2 text-white/80 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
+                <div>
+                  <p className="text-xs uppercase tracking-[0.35em] text-white/45">{project.category}</p>
+                  <h3 className="mt-3 font-display text-3xl text-white">{project.title}</h3>
+                  <p className="mt-2 text-lg text-white/55">{project.subtitle}</p>
                 </div>
                 <p className="mt-6 max-w-xl leading-8 text-white/68">{project.summary}</p>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -105,9 +102,9 @@ function ProjectLink({ href, icon: Icon, label }) {
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/75 transition hover:bg-white/10 hover:text-white"
-      whileHover={{ y: -3, scale: 1.01 }}
-      whileTap={{ scale: 0.98 }}
+      className="inline-flex items-center gap-2 rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(255,255,255,0.12),rgba(255,255,255,0.05))] px-4 py-3 text-sm font-semibold text-white/88 shadow-[0_16px_40px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-xl transition duration-150 hover:border-white/24 hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.18),rgba(255,255,255,0.07))] hover:text-white"
+      whileHover={{ y: -2, scale: 1.04 }}
+      whileTap={{ scale: 0.94, y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 22 }}
     >
       <Icon className="h-4 w-4" />

@@ -55,6 +55,13 @@ export const portfolioData = {
     title: "Engineering software that feels both intelligent and refined.",
     copy:
       "Computer Science (AI & ML) student at Lovely Professional University focused on building scalable backend systems, intelligent AI applications, and modern web platforms.",
+    leadCard: {
+      institution: "Lovely Professional University",
+      meta: "B.Tech CSE (AI & ML)  •  Building full-stack and AI-native products",
+      statement:
+        "Focused on shipping scalable web platforms, stronger backend systems, and polished user experiences that feel credible from the first interaction.",
+      badges: ["MERN", "AI & ML", "System Design", "React", "Node.js", "MongoDB"],
+    },
     supporting:
       "I work at the intersection of product design, backend architecture, and applied machine learning, with a preference for software that ships cleanly and scales responsibly.",
     chips: [
@@ -281,7 +288,7 @@ export const portfolioData = {
     cardTitle: "Aman Chahar Resume",
     description:
       "Premium PDF CV with full-stack, AI/ML, and product engineering experience.",
-    pills: ["PDF", "242 KB"],
+    pills: ["PDF"],
   },
   contact: {
     eyebrow: "Contact",

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { portfolioData } from "./data/portfolio";
 import { useMediaQuery } from "./hooks/useMediaQuery";
@@ -13,7 +14,6 @@ import { ProjectsSection } from "./sections/ProjectsSection";
 import { ResumeSection } from "./sections/ResumeSection";
 import { SkillsSection } from "./sections/SkillsSection";
 import { BackgroundDepth } from "./components/BackgroundDepth";
-import { CustomCursor } from "./components/CustomCursor";
 import { Footer } from "./components/Footer";
 import { IntroLoader } from "./components/IntroLoader";
 import { Navbar } from "./components/Navbar";
@@ -21,6 +21,29 @@ import { ProjectModal } from "./components/ProjectModal";
 import { ResumePreviewModal } from "./components/ResumePreviewModal";
 
 gsap.registerPlugin(ScrollTrigger);
+
+function ScrollProgress({ hidden }) {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 180,
+    damping: 28,
+    mass: 0.2,
+  });
+
+  return (
+    <div className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-[3px]">
+      <div className="absolute inset-0 bg-[rgba(255,122,24,0.12)]" />
+      <motion.div
+        aria-hidden
+        className="h-full origin-left bg-[#ff7a18] shadow-[0_0_14px_rgba(255,122,24,0.28)]"
+        style={{
+          scaleX: hidden ? 0 : scaleX,
+          transformOrigin: "0% 50%",
+        }}
+      />
+    </div>
+  );
+}
 
 function App() {
   const rootRef = useRef(null);
@@ -32,8 +55,7 @@ function App() {
   const [activeSection, setActiveSection] = useState("about");
 
   useEffect(() => {
-    const hasVisited = window.localStorage.getItem("aman-chahar-intro-seen");
-    if (!hasVisited && !reducedMotion) {
+    if (!reducedMotion) {
       setShowIntro(true);
     }
   }, [reducedMotion]);
@@ -42,13 +64,6 @@ function App() {
     if (!rootRef.current || showIntro || reducedMotion) return undefined;
 
     const ctx = gsap.context(() => {
-      gsap.from("[data-main-content]", {
-        opacity: 0,
-        y: 18,
-        duration: 0.9,
-        ease: "power3.out",
-      });
-
       gsap.utils.toArray("[data-reveal]").forEach((element) => {
         gsap.from(element, {
           opacity: 0,
@@ -87,7 +102,6 @@ function App() {
   }, []);
 
   const handleIntroComplete = () => {
-    window.localStorage.setItem("aman-chahar-intro-seen", "true");
     setShowIntro(false);
   };
 
@@ -95,19 +109,21 @@ function App() {
 
   return (
     <div ref={rootRef} className="relative min-h-screen overflow-x-hidden bg-ink text-white">
+      <ScrollProgress hidden={showIntro} />
       <BackgroundDepth disabled={isMobile || reducedMotion} />
-      <CustomCursor disabled={isMobile || reducedMotion} />
       <IntroLoader visible={showIntro} onComplete={handleIntroComplete} />
-
-      <div
-        data-main-content
-        className={`relative z-10 transition-opacity duration-700 ${showIntro ? "pointer-events-none opacity-0" : "opacity-100"}`}
-      >
+      <div className={`relative z-20 transition-opacity duration-700 ${showIntro ? "pointer-events-none opacity-0" : "opacity-100"}`}>
         <Navbar
           items={portfolioData.navItems}
           activeSection={activeSection}
           brandName={portfolioData.identity.name.toUpperCase()}
         />
+      </div>
+
+      <div
+        data-main-content
+        className={`relative z-10 transition-opacity duration-700 ${showIntro ? "pointer-events-none opacity-0" : "opacity-100"}`}
+      >
         <main>
           <div data-reveal>
             <HeroSection data={portfolioData.identity} {...sectionProps} />

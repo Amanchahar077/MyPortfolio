@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
 import { SectionLines } from "../components/ui/SectionLines";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
 export function SkillsSection({ data, isMobile }) {
-  const [glow, setGlow] = useState({ x: "50%", y: "50%" });
   const constellationNodes = [
     { label: "APIs", top: "18%", left: "66%" },
     { label: "AI", top: "31%", left: "28%" },
@@ -18,10 +16,8 @@ export function SkillsSection({ data, isMobile }) {
   const handleMove = (event) => {
     if (isMobile) return;
     const rect = event.currentTarget.getBoundingClientRect();
-    setGlow({
-      x: `${((event.clientX - rect.left) / rect.width) * 100}%`,
-      y: `${((event.clientY - rect.top) / rect.height) * 100}%`,
-    });
+    event.currentTarget.style.setProperty("--glow-x", `${((event.clientX - rect.left) / rect.width) * 100}%`);
+    event.currentTarget.style.setProperty("--glow-y", `${((event.clientY - rect.top) / rect.height) * 100}%`);
   };
 
   return (
@@ -32,6 +28,10 @@ export function SkillsSection({ data, isMobile }) {
         <GlassCard
           className="relative overflow-hidden rounded-[36px] p-6 sm:p-8"
           onPointerMove={handleMove}
+          onPointerLeave={(event) => {
+            event.currentTarget.style.removeProperty("--glow-x");
+            event.currentTarget.style.removeProperty("--glow-y");
+          }}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
@@ -40,7 +40,8 @@ export function SkillsSection({ data, isMobile }) {
           <div
             className="pointer-events-none absolute inset-0 opacity-80 transition duration-300"
             style={{
-              background: `radial-gradient(circle at ${glow.x} ${glow.y}, rgba(255,122,24,0.16), transparent 26%), radial-gradient(circle at 85% 15%, rgba(86,164,255,0.12), transparent 18%)`,
+              background:
+                "radial-gradient(circle at var(--glow-x,50%) var(--glow-y,50%), rgba(255,122,24,0.16), transparent 26%), radial-gradient(circle at 85% 15%, rgba(86,164,255,0.12), transparent 18%)",
             }}
           />
           <div className="relative grid gap-4 sm:grid-cols-2 xl:grid-cols-3">

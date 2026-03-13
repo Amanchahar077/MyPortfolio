@@ -12,6 +12,7 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none;
 }
 
 body {
@@ -22,6 +23,12 @@ body {
     radial-gradient(circle at 80% 20%, rgba(86, 164, 255, 0.08), transparent 18%),
     #06070a;
   color: white;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
 }
 
 * {

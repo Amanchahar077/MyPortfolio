@@ -40,9 +40,9 @@ export function ExperienceSection({ data }) {
                 href={item.certificate}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/75 transition hover:bg-white/10 hover:text-white"
-                whileHover={{ y: -3, scale: 1.01 }}
-                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/14 bg-[linear-gradient(135deg,rgba(255,255,255,0.12),rgba(255,255,255,0.05))] px-4 py-3 text-sm font-semibold text-white/88 shadow-[0_16px_40px_rgba(0,0,0,0.18),inset_0_1px_0_rgba(255,255,255,0.14)] backdrop-blur-xl transition duration-150 hover:border-white/24 hover:bg-[linear-gradient(135deg,rgba(255,255,255,0.18),rgba(255,255,255,0.07))] hover:text-white"
+                whileHover={{ y: -2, scale: 1.04 }}
+                whileTap={{ scale: 0.94, y: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 22 }}
               >
                 <FileBadge2 className="h-4 w-4" />
