@@ -1,26 +1,27 @@
 export const portfolioData = {
   identity: {
     name: "Aman Chahar",
-    theme: "AI & Full-Stack Portfolio",
+    theme: "Full-Stack Portfolio",
     summary:
-      "Computer Science student building premium web platforms, scalable backend systems, and AI-native software with a product mindset.",
+      "Computer Science student building premium web platforms, scalable fullstack systems, and AI-native softwares with a product mindset.",
     heroRoles: [
       "Full Stack Developer",
-      "AI & ML Engineer",
-      "Backend Systems Builder",
+      "Tech Enthusiast",
+      "Web/App Builder",
+      "Java Programmer"
     ],
     heroButtons: [
       { label: "View Projects", href: "#projects", variant: "primary" },
       { label: "Download Resume", href: "#resume", variant: "secondary" },
       {
         label: "GitHub",
-        href: "https://github.com/Tejpraval",
+        href: "https://github.com/Amanchahar077",
         variant: "ghost",
         external: true,
       },
       {
         label: "LinkedIn",
-        href: "https://www.linkedin.com/in/tej-praval-pula",
+        href: "https://www.linkedin.com/in/aman-chahar077/",
         variant: "ghost",
         external: true,
       },
@@ -29,14 +30,14 @@ export const portfolioData = {
       title: "Available for internships and product roles",
       focusTitle: "Current Focus",
       focus:
-        "Scalable backend systems, AI product workflows, and polished frontend execution.",
+        "Scalable fullstack systems, web/app product workflows, and polished frontend execution.",
       capabilities: [
         {
           label: "MERN",
-          value: "Product-grade full stack",
+          value: "Product-grade development",
         },
         {
-          label: "AI/ML",
+          label: "FULLSTACK",
           value: "Intelligent systems design",
         },
       ],
@@ -54,16 +55,16 @@ export const portfolioData = {
     eyebrow: "About",
     title: "Engineering software that feels both intelligent and refined.",
     copy:
-      "Computer Science (AI & ML) student at Lovely Professional University focused on building scalable backend systems, intelligent AI applications, and modern web platforms.",
+      "Computer Science (Full-Stack) student at Lovely Professional University focused on building scalable systems, Intelligent AI integrated applications, and modern web/app platforms.",
     leadCard: {
       institution: "Lovely Professional University",
-      meta: "B.Tech CSE (AI & ML)  •  Building full-stack and AI-native products",
+      meta: "B.Tech CSE (Full-Stack)  •  Building Full-stack and AI-integrated products",
       statement:
         "Focused on shipping scalable web platforms, stronger backend systems, and polished user experiences that feel credible from the first interaction.",
-      badges: ["MERN", "AI & ML", "System Design", "React", "Node.js", "MongoDB"],
+      badges: ["MERN", "Java", "System Design", "React", "Node.js", "MongoDB"],
     },
     supporting:
-      "I work at the intersection of product design, backend architecture, and applied machine learning, with a preference for software that ships cleanly and scales responsibly.",
+      "I work at the intersection of product design, system architecture, with a preference for software that ships cleanly and scales responsibly.",
     chips: [
       "distributed systems",
       "AI-driven applications",
@@ -77,12 +78,12 @@ export const portfolioData = {
     ],
     highlights: [
       {
-        title: "AI-native products",
+        title: "AI-integrated products",
         body: "Designing software that feels intelligent, not just automated.",
       },
       {
         title: "Production-minded systems",
-        body: "Building backend platforms with safer rollout patterns and sharp execution.",
+        body: "Building platforms with safer rollout patterns and sharp execution.",
       },
       {
         title: "Recruiter-ready polish",
@@ -98,7 +99,7 @@ export const portfolioData = {
     copy:
       "Each tool is presented with the same emphasis: capability matters, but execution quality matters more.",
     groups: [
-      { title: "Languages", items: ["C++", "TypeScript", "JavaScript", "Python", "C"] },
+      { title: "Languages", items: ["C++", "TypeScript", "JavaScript","Java" , "Python", "C"] },
       { title: "Frontend", items: ["React.js", "HTML5", "CSS3", "Bootstrap", "Tailwind"] },
       {
         title: "Backend",
@@ -260,22 +261,22 @@ export const portfolioData = {
       "A compact timeline of internships that shaped both technical breadth and execution discipline.",
     items: [
       {
-        role: "AI Intern",
-        company: "Alpha Innovation",
-        dates: "Aug 5, 2025 - Oct 5, 2025",
+        role: "Java Intern",
+        company: "ElevateLabs",
+        dates: "Sep 25, 2025 - Nov 25, 2025",
         description:
-          "Worked on supervised classification models and AI experimentation pipelines.",
+          "Applied object-oriented design principles and implemented reusable utility classes to enhance code maintainability and boost system performance by 25%.",
         certificate:
-          "https://drive.google.com/drive/folders/1Bbd0r2km-gg9dmJkVMulrUfF4eNvpmSt?usp=sharing",
+          "https://drive.google.com/drive/folders/1eP99LshVhQbavb_81fN-8z0sMsI_Df5G",
       },
       {
-        role: "Frontend Developer",
-        company: "Codtech IT Solutions",
-        dates: "Mar 20, 2025 - Apr 20, 2025",
+        role: "Placement Coordinator",
+        company: "Department of career services LPU",
+        dates: "Dec 20, 2023 - Present",
         description:
-          "Developed responsive frontend applications using React and Bootstrap.",
+          "Assisted the Department of career services as student placement coordinator. ",
         certificate:
-          "https://drive.google.com/drive/folders/1hA23K0hDIb1xDeiRfyKsZYrGY1warGsb?usp=sharing",
+          "https://drive.google.com/drive/folders/1BLNxY-JlUh4p5pw-RR6QJimX1iVVOMpO",
       },
     ],
   },
@@ -285,9 +286,9 @@ export const portfolioData = {
     copy:
       "A polished, recruiter-ready CV presented as an interactive artifact rather than a plain file link.",
     file: "/resume/Tej_Praval_Resume.pdf",
-    cardTitle: "Aman Chahar Resume",
+    cardTitle: "Aman's Resume",
     description:
-      "Premium PDF CV with full-stack, AI/ML, and product engineering experience.",
+      "Premium PDF CV with full-stack and product engineering experience.",
     pills: ["PDF"],
   },
   contact: {
@@ -299,23 +300,23 @@ export const portfolioData = {
     cards: [
       {
         label: "Email",
-        value: "tejpraval32@gmail.com",
-        href: "mailto:tejpraval32@gmail.com",
+        value: "amanchahar828@gmail.com",
+        href: "mailto:amanchahar828@gmail.com",
       },
       {
         label: "Phone",
-        value: "+91 9676767993",
-        href: "tel:+919676767993",
+        value: "+91 9302971271",
+        href: "tel:+919302971271",
       },
       {
         label: "LinkedIn",
-        value: "tej-praval-pula",
-        href: "https://www.linkedin.com/in/tej-praval-pula",
+        value: "Aman Chahar",
+        href: "https://www.linkedin.com/in/aman-chahar077/",
       },
       {
         label: "GitHub",
-        value: "Tejpraval",
-        href: "https://github.com/Tejpraval",
+        value: "Amanchahar077",
+        href: "https://github.com/Amanchahar077",
       },
     ],
     panel: {

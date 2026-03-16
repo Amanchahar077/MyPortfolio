@@ -129,7 +129,7 @@ function App() {
             <HeroSection data={portfolioData.identity} {...sectionProps} />
           </div>
           <div data-reveal>
-            <AboutSection data={portfolioData.about} />
+            <AboutSection data={portfolioData.about} contact={portfolioData.contact} />
           </div>
           <div data-reveal>
             <SkillsSection data={portfolioData.skills} isMobile={isMobile} />

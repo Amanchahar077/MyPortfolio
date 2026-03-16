@@ -123,7 +123,7 @@ export function HeroSection({ data, reducedMotion, isMobile }) {
             variants={revealSoft}
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,24,0.16),transparent_32%),radial-gradient(circle_at_bottom_left,rgba(86,164,255,0.14),transparent_28%)]" />
-            {!isMobile && !reducedMotion ? (
+            {!reducedMotion ? (
               <ThreeBackground className="absolute inset-0 opacity-55" />
             ) : null}
             <div className="relative z-10">

@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { Code2, Sparkles } from "lucide-react";
+import { Code2, Sparkles, Rocket, Target, User, Link2, Github, Linkedin, Mail, Phone } from "lucide-react";
 import { GlassCard } from "../components/ui/GlassCard";
 import { revealSoft, revealUp, viewportOnce } from "../components/ui/motion";
 import { SectionHeader } from "../components/ui/SectionHeader";
 
-export function AboutSection({ data }) {
+export function AboutSection({ data, contact }) {
   const handleMove = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const x = ((event.clientX - rect.left) / rect.width - 0.5) * 11;
@@ -109,48 +109,142 @@ export function AboutSection({ data }) {
         </div>
       </GlassCard>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-[0.92fr_1.08fr]">
+      <div className="mt-10 grid gap-6 lg:grid-cols-2">
         <GlassCard
-          className="group relative overflow-hidden rounded-[36px] p-5 sm:p-6"
+          className="group relative overflow-hidden rounded-[32px] p-6 transition duration-300 will-change-transform hover:-translate-y-3 hover:scale-[1.3] hover:shadow-[0_20px_50px_rgba(255,122,24,0.12)] sm:p-7"
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
           variants={revealSoft}
         >
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,122,24,0.12),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(86,164,255,0.1),transparent_26%)]" />
-          <div className="relative overflow-hidden rounded-[28px] border border-white/10">
-            <img src={data.photo} alt="Aman Chahar" className="h-full min-h-[420px] w-full object-cover" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,122,24,0.12),transparent_40%),radial-gradient(circle_at_bottom_right,rgba(86,164,255,0.14),transparent_42%)]" />
+          <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100 bg-[radial-gradient(circle_at_30%_18%,rgba(255,122,24,0.1),transparent_46%),radial-gradient(circle_at_70%_80%,rgba(86,164,255,0.1),transparent_50%)]" />
+          <div className="relative">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/5 text-brand-soft">
+                <User className="h-5 w-5" />
+              </span>
+              <h3 className="font-display text-xl text-white">Who I Am</h3>
+            </div>
+            <p className="mt-4 text-sm uppercase tracking-[0.2em] text-white/45">{data.leadCard.institution}</p>
+            <p className="mt-4 text-[0.98rem] leading-7 text-white/70">{data.leadCard.statement}</p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {data.leadCard.badges.map((badge) => (
+                <span
+                  key={badge}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white/70"
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
           </div>
         </GlassCard>
 
         <GlassCard
-          className="rounded-[36px] p-6 sm:p-8"
+          className="group relative overflow-hidden rounded-[32px] p-6 transition duration-300 will-change-transform hover:-translate-y-3 hover:scale-[1.3] hover:shadow-[0_20px_50px_rgba(86,164,255,0.12)] sm:p-7"
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          variants={revealUp}
+          variants={revealSoft}
         >
-          <p className="max-w-3xl text-base leading-8 text-white/68">{data.supporting}</p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {data.chips.map((chip) => (
-              <span key={chip} className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/75">
-                {chip}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(86,164,255,0.16),transparent_42%),radial-gradient(circle_at_bottom_left,rgba(255,122,24,0.1),transparent_38%)]" />
+          <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100 bg-[radial-gradient(circle_at_20%_20%,rgba(86,164,255,0.1),transparent_50%),radial-gradient(circle_at_80%_75%,rgba(255,122,24,0.1),transparent_52%)]" />
+          <div className="relative">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/5 text-brand-soft">
+                <Rocket className="h-5 w-5" />
               </span>
-            ))}
+              <h3 className="font-display text-xl text-white">My Mission</h3>
+            </div>
+            <p className="mt-4 text-[0.98rem] leading-7 text-white/70">{data.copy}</p>
+            <p className="mt-4 text-sm text-white/55">{data.supporting}</p>
           </div>
-          <div className="mt-8 grid gap-4">
-            {data.highlights.map((highlight) => (
-              <motion.div
-                key={highlight.title}
-                className="rounded-[24px] border border-white/10 bg-white/[0.04] p-5"
-                variants={revealSoft}
-                whileHover={{ y: -4, scale: 1.005 }}
-                transition={{ type: "spring", stiffness: 260, damping: 22 }}
-              >
-                <h3 className="font-display text-xl text-white">{highlight.title}</h3>
-                <p className="mt-2 leading-7 text-white/65">{highlight.body}</p>
-              </motion.div>
-            ))}
+        </GlassCard>
+
+        <GlassCard
+          className="group relative overflow-hidden rounded-[32px] p-6 transition duration-300 will-change-transform hover:-translate-y-3 hover:scale-[1.3] hover:shadow-[0_20px_50px_rgba(255,122,24,0.12)] sm:p-7"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={revealSoft}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_18%,rgba(255,122,24,0.16),transparent_42%),radial-gradient(circle_at_top_right,rgba(86,164,255,0.12),transparent_36%)]" />
+          <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100 bg-[radial-gradient(circle_at_35%_15%,rgba(255,122,24,0.1),transparent_52%),radial-gradient(circle_at_75%_78%,rgba(86,164,255,0.1),transparent_55%)]" />
+          <div className="relative">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/5 text-brand-soft">
+                <Target className="h-5 w-5" />
+              </span>
+              <h3 className="font-display text-xl text-white">My Approach</h3>
+            </div>
+            <div className="mt-4 grid gap-3">
+              {data.highlights.map((highlight, index) => (
+                <motion.div
+                  key={`${highlight.title}-${index}`}
+                  className="rounded-[18px] border border-white/10 bg-white/[0.04] px-4 py-3"
+                  variants={revealSoft}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={viewportOnce}
+                >
+                  <h4 className="text-sm font-semibold text-white">{highlight.title}</h4>
+                  <p className="mt-1 text-sm text-white/60">{highlight.body}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </GlassCard>
+
+        <GlassCard
+          className="group relative overflow-hidden rounded-[32px] p-6 transition duration-300 will-change-transform hover:-translate-y-3 hover:scale-[1.3] hover:shadow-[0_20px_50px_rgba(86,164,255,0.12)] sm:p-7"
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={revealSoft}
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_82%,rgba(86,164,255,0.16),transparent_42%),radial-gradient(circle_at_top_left,rgba(255,122,24,0.12),transparent_38%)]" />
+          <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-300 group-hover:opacity-100 bg-[radial-gradient(circle_at_18%_70%,rgba(86,164,255,0.1),transparent_52%),radial-gradient(circle_at_70%_20%,rgba(255,122,24,0.1),transparent_52%)]" />
+          <div className="relative">
+            <div className="flex items-center gap-3">
+              <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white/5 text-brand-soft">
+                <Link2 className="h-5 w-5" />
+              </span>
+              <h3 className="font-display text-xl text-white">Connect With Me</h3>
+            </div>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              {contact?.cards?.map((card) => {
+                const icon =
+                  card.label === "GitHub" ? (
+                    <Github className="h-4 w-4" />
+                  ) : card.label === "LinkedIn" ? (
+                    <Linkedin className="h-4 w-4" />
+                  ) : card.label === "Email" ? (
+                    <Mail className="h-4 w-4" />
+                  ) : (
+                    <Phone className="h-4 w-4" />
+                  );
+
+                return (
+                  <a
+                    key={card.label}
+                    href={card.href}
+                    className="group flex min-h-[92px] items-center gap-4 rounded-[20px] border border-white/10 bg-white/[0.05] px-5 py-4 shadow-[0_16px_36px_rgba(0,0,0,0.22)] transition hover:-translate-y-0.5 hover:border-white/20"
+                    {...(card.href?.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white/5 text-brand-soft">
+                      {icon}
+                    </span>
+                    <div className="min-w-0">
+                      <div className="text-base font-semibold text-white">{card.label}</div>
+                      <div className="mt-1 text-sm text-white/55 break-all">
+                        {card.value}
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </GlassCard>
       </div>
