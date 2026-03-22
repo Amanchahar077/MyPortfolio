@@ -24,6 +24,9 @@ export function Button({
 }) {
   const Component = as;
   const MotionComponent = Component === "button" ? motion.button : motion.a;
+  const isExternalHref =
+    typeof href === "string" && /^(https?:)?\/\//.test(href);
+  const shouldOpenNewTab = external || isExternalHref;
   const componentProps =
     Component === "button"
       ? { type: "button", onClick }
@@ -50,7 +53,7 @@ export function Button({
       }}
       whileTap={subtleTap}
       transition={{ type: "spring", stiffness: 280, damping: 24 }}
-      {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
+      {...(shouldOpenNewTab ? { target: "_blank", rel: "noreferrer" } : {})}
       {...props}
     >
       {content}

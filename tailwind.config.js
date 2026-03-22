@@ -11,8 +11,8 @@ export default {
         line: "rgba(255,255,255,0.08)",
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        display: ["Sora", "sans-serif"],
+        sans: ["Manrope", "sans-serif"],
+        display: ["Outfit", "sans-serif"],
       },
       boxShadow: {
         glow: "0 0 0 1px rgba(255,255,255,0.06), 0 20px 80px rgba(0,0,0,0.45)",

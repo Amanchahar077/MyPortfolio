@@ -7,6 +7,7 @@ import { useMediaQuery } from "./hooks/useMediaQuery";
 import { usePrefersReducedMotion } from "./hooks/usePrefersReducedMotion";
 import { AboutSection } from "./sections/AboutSection";
 import { ClosingSection } from "./sections/ClosingSection";
+import { CertificatesSection } from "./sections/CertificatesSection";
 import { ContactSection } from "./sections/ContactSection";
 import { ExperienceSection } from "./sections/ExperienceSection";
 import { HeroSection } from "./sections/HeroSection";
@@ -82,7 +83,7 @@ function App() {
   }, [reducedMotion, showIntro]);
 
   useEffect(() => {
-    const ids = ["about", "skills", "projects", "experience", "resume", "contact"];
+    const ids = ["about", "skills", "projects", "certificates", "experience", "resume", "contact"];
     const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
 
     const observer = new IntersectionObserver(
@@ -136,6 +137,9 @@ function App() {
           </div>
           <div data-reveal>
             <ProjectsSection data={portfolioData.projects} onOpenProject={setSelectedProject} />
+          </div>
+          <div data-reveal>
+            <CertificatesSection data={portfolioData.certificates} />
           </div>
           <div data-reveal>
             <ExperienceSection data={portfolioData.experience} />

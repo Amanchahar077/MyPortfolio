@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -6,11 +6,12 @@
 
 :root {
   color-scheme: dark;
-  font-family: "Inter", sans-serif;
+  font-family: "Manrope", sans-serif;
   background: #06070a;
 }
 
 html {
+  font-size: 15px;
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
@@ -24,6 +25,10 @@ body {
     #06070a;
   color: white;
   -ms-overflow-style: none;
+  font-family: "Manrope", sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html::-webkit-scrollbar,
@@ -53,6 +58,12 @@ a {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
